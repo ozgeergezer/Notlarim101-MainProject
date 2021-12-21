@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Notlarim101.BusinessLayer;
 using Notlarim101.Entity;
-using Notlarim101.WebApp.ViewModel;
+using Notlarim101.Entity.ValueObject;
 
 namespace Notlarim101.WebApp.Controllers
 {
@@ -69,7 +69,20 @@ namespace Notlarim101.WebApp.Controllers
         [HttpPost]
         public ActionResult LogIn(LoginViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                NotlarimUserManager num = new NotlarimUserManager();
+                BusinessLayerResult<NotlarimUser> res = num.LoginUser(model);
+                if (res.Errors.Count>0)
+                {
+                    res.Errors.ForEach(s => ModelState.AddModelError("", s.Value));
+                    return View(model);
+                }
+                //yonlendirme ve session
+                Session["login"] = res.Result; //sessiona kullanıcı bilgisi aktarma
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
         public ActionResult Register()
         {
@@ -79,8 +92,32 @@ namespace Notlarim101.WebApp.Controllers
         public ActionResult Register(RegisterViewModel model)
         {
             //bool hasError = false;
+            
             if (ModelState.IsValid)
             {
+                NotlarimUserManager num = new NotlarimUserManager();
+                BusinessLayerResult<NotlarimUser> res = num.RegisterUser(model);
+
+                if (res.Errors.Count>0)
+                {
+                    res.Errors.ForEach(s => ModelState.AddModelError("",s.Value)); //hataları döngüye sokuyor
+                    return View(model);
+                }
+                //try
+                //{
+                //    user = num.RegisterUser(model);
+                //}
+                //catch (Exception ex)
+                //{
+                //    ModelState.AddModelError("",ex.Message);
+                //}
+                //if (user==null)
+                //{
+                //    return View(model);
+                //}
+                //return RedirectToAction("RegisterOK");
+
+
                 //if (model.UserName=="aaa")
                 //{
                 //    ModelState.AddModelError("", "kullanıcı adı alınmış.");
@@ -107,6 +144,7 @@ namespace Notlarim101.WebApp.Controllers
                 //{
                 //    return RedirectToAction("RegisterOK");
                 //}
+                return RedirectToAction("RegisterOK");
             }
             return View(model);
         }

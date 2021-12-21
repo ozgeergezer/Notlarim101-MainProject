@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Notlarim101.Core.DataAccess;
 using Notlarim101.DataAccessLayer;
 using Notlarim101.DataAccessLayer.Abstract;
+using Notlarim101.Entity;
 
 namespace Notlarim101.DataAccessLayer.EntityFramework
 {
@@ -42,11 +43,25 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
         public int Insert(T obj)
         {
             objSet.Add(obj);
+            if (obj is MyEntityBase)
+            {
+                MyEntityBase o = obj as MyEntityBase;
+                DateTime now = DateTime.Now;
+                o.CreatedOn = now;
+                o.ModifiedOn = now;
+                o.ModifiedUsername = "system"; 
+            }
             return Save();
         }
 
         public int Update(T obj)
         {
+            if (obj is MyEntityBase) //liked myentity baseden gelmiyor mesela 
+            {
+                MyEntityBase o = obj as MyEntityBase; // obj nesnesi myentitybase nesnesi gibidir.
+                o.ModifiedOn = DateTime.Now;
+                o.ModifiedUsername = "system";
+            }
             return Save();
         }
 

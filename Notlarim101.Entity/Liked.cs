@@ -13,7 +13,6 @@ namespace Notlarim101.Entity
     {
         [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         public virtual Note Note { get; set; }
         public virtual NotlarimUser LikedUser { get; set; }
 

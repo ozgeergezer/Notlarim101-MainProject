@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Notlarim101.WebApp.ViewModel
+namespace Notlarim101.Entity.ValueObject
 {
     public class RegisterViewModel
     {
@@ -15,7 +15,7 @@ namespace Notlarim101.WebApp.ViewModel
         public string EMail { get; set; }
         [DisplayName("Şifre"), Required(ErrorMessage = "{0} alanı boş geçilemez."), DataType(DataType.Password), StringLength(30, ErrorMessage = "{0} max. {1} karakter olmalı")]
         public string Password { get; set; }
-        [DisplayName("Şifre tekrar"), Required(ErrorMessage = "{0} alanı boş geçilemez."), DataType(DataType.Password), StringLength(30, ErrorMessage = "{0} max. {1} karakter olmalı"),Compare("password", ErrorMessage ="{0} ile {1} uyuşmuyor..")]
+        [DisplayName("Şifre Tekrar"), Required(ErrorMessage = "{0} alanı boş geçilemez."), DataType(DataType.Password), StringLength(30, ErrorMessage = "{0} max. {1} karakter olmalı"),Compare("Password",ErrorMessage ="{0} ile {1} uyusmuyor ")]
         public string RePassword { get; set; }
     }
 }
