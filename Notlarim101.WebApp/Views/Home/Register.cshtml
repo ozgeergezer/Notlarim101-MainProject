@@ -11,9 +11,19 @@
     <div class="logreg">
         <main class="form-signin">
             <form>
-                <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+                <img class="mb-4 rounded-circle"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK6uAwJ2JNN2hrgWi18n2nGk5iJ9yF7N7ghg&usqp=CAU" alt="" width="180" height="180">
                 <h1 class="h3 mb-3 fw-normal">Giriş Formu</h1>
                 @Html.ValidationSummary(false)
+                <div class="form-floating">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Adı", id = "floatingNameInput" })
+                    @*<input type="email" class="form-control" id="floatingInput" placeholder="Kullanıcı Adı">*@
+                    <label for="floatingInput">Adı</label>
+                </div>
+                <div class="form-floating">
+                    @Html.TextBoxFor(model => model.SurName, new { @class = "form-control", placeholder = "Soyadı", id = "floatingSurNameInput" })
+                    @*<input type="email" class="form-control" id="floatingInput" placeholder="Kullanıcı Adı">*@
+                    <label for="floatingInput">Soyadı</label>
+                </div>
                 <div class="form-floating">
                     @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "Kullanıcı Adı", id = "floatingInput" })
                     @*<input type="email" class="form-control" id="floatingInput" placeholder="Kullanıcı Adı">*@
@@ -25,21 +35,21 @@
                     <label for="floatingEmail">E Mail</label>
                 </div>
                 <div class="form-floating">
-                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifre", id = "floatingPassword", Type = "password" })
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifre", id = "floatingPassword", type = "password" })
                     @*<input type="password" class="form-control" id="" placeholder="Şifre">*@
                     <label for="floatingPassword">Şifre</label>
                 </div>
                 <div class="form-floating">
-                    @Html.TextBoxFor(model => model.RePassword, new { @class = "form-control", placeholder = "Şifre Tekrar", id = "floatingRePassword", Type = "password" })
+                    @Html.TextBoxFor(model => model.RePassword, new { @class = "form-control", placeholder = "Şifre Tekrar", id = "floatingRePassword", type = "password" })
                     @*<input type="password" class="form-control" id="" placeholder="Şifre">*@
                     <label for="floatingRePassword">Şifre Tekrar</label>
                 </div>
 
                 @*<div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                    </div>*@
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>*@
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                 <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
             </form>
